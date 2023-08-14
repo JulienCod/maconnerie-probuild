@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: montserrat;
+  src: url(./fonts/Montserrat-VariableFont_wght.woff2);
+}
+@font-face {
+  font-family: lato-regular;
+  src: url(./fonts/Lato-Regular.woff2);
+}
+@font-face {
+  font-family: lato-bold;
+  src: url(./fonts/Lato-Bold.woff2);
+}
+
+* {
+  font-family: lato-regular;
+}
+
+h1 {
+  font-size: 50px;
+  font-family: montserrat;
+}
+h2 {
+  font-size: 38px;
+  font-family: montserrat;
+}
+h3 {
+  font-size: 28px;
+  font-family: montserrat;
+}
+h4 {
+  font-size: 21px;
+  font-family: montserrat;
+}
+
+
+  .test{
+    /* position: absolute;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease; */
+    left: 0;
+    top: 0;
+    padding: 0.5em 0;
+    position: absolute;
+    content: attr(data-hover);
+    color: #ffffff;
+    white-space: nowrap;
+    max-width: 0%;
+    overflow: hidden;
+  }
+  .current {
+    max-width: 100%;
+  }
+  
