@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+	{# banniere #}
 	<section class="max-w-screen-2xl m-auto">
 		<article class="relative">
 			<div class="bg-beige_chaud_clair min-h-[711px] md:min-h-[423px] relative w-full"></div>
@@ -23,10 +24,11 @@
 				</div>
 			</div>
 		</article>
+		{# fin banniere #}
+
 		{# service #}
 		<article class="text-center bg-beige_chaud_clair py-8 mt-8">
 			<h2 class="my-12">Nos Services</h2>
-
 			<div class="w-full flex gap-8 flex-col md:flex-row md:justify-center">
 				<img class=" md:w-[calc((100%/3)-(32px*2))] object-cover object-center " src="images/static/service-1.webp" alt="">
 				<ul class="flex flex-col gap-8 flex-[1 1 300px] md:w-[calc((100%/3)-(32px*2))]">
@@ -47,11 +49,12 @@
 			</div>
 			<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="/nos-services">Explorer nos services</a>
 		</article>
+		{# fin service #}
+
 		{# Réalisation #}
-		<article class="py-8 text-center">
+		<article class="pt-8 text-center">
 			<h2 class="mb-8">Nos réalisations parlent d'elles-mêmes</h2>
 			<p class="m-auto w-[75%] mb-8">Découvrez des exemples de notre travail expert en maçonnerie. Chaque projet est une pièce maîtresse de notre engagement envers l'excellence et la qualité.</p>
-
 			<div
 				id="default-carousel" class="relative w-full" data-carousel="slide">
 				<!-- Carousel wrapper -->
@@ -104,7 +107,28 @@
 					</span>
 				</button>
 			</div>
+		</article>
+		{# fin Réalisation #}
 
+		<article class="py-8 text-center bg-beige_chaud_clair">
+			<h2 class="mb-8">Pourquoi Choisir Maçonnerie ProBuild ?</h2>
+			<ul>
+                <li>
+                    Expérience solide en maçonnerie
+                </li>
+                <li>
+                    Équipe hautement qualifiée
+                </li>
+                <li>
+                    Qualité et durabilité garanties
+                </li>
+                <li>
+                    Approche personnelle à chaque projet
+                </li>
+            </ul>
+            <a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="/a-propos">
+                Découvrez ce qui nous distingue
+            </a>
 		</article>
 	</section>
 {% endblock %}
