@@ -4,27 +4,48 @@
 {% endblock %}
 
 {% block body %}
-	<section class="relative max-w-screen-2xl m-auto">
-		<div class="bg-beige_chaud min-h-[711px] md:min-h-[423px] relative w-full"></div>
-		<img class="relative shadow-2xl rounded-2xl mt-[-593px] min-h-[50%] max-w-[643px] w-[calc(100%-10%)] ml-[5%] object-center object-cover md:mt-[-306px] md:ml-[calc(((100%-80%)/2))] lg:w-[60%] lg:max-w-[958px] lg:ml-[calc(((100%-90%)/2))]" src="images/static/hero-banner.webp" alt="Image d'un maçon qui monte un mur">
-		<div class="relative shadow-2xl bg-gris_ardoise max-w-[643px] rounded-2xl mt-5 w-[calc(100%-10%)] ml-[5%] md:w-[625px] md:mt-[-60px] md:mr-[calc(((100%-70%)/2))]  md:ml-auto lg:w-[60%] lg:mt-[-280px] lg:max-w-[958px] lg:mr-[calc(((100%-90%)/2))]">
-			<div class="p-4 ">
-				<h1>Bienvenue chez Maçonnerie ProBuild</h1>
-				<p class="my-4">Notre Art, Votre Espoir, Réalisé en Pierre
-					<br>
-					<br>
-					Chez Maçonnerie ProBuild, nous croyons en la puissance de la maçonnerie pour transformer vos rêves en réalité. Chaque brique, chaque pierre que nous posons est imprégnée de notre engagement envers l'excellence et la durabilité. Nous façonnons votre espoir en une réalité solide qui durera des générations.
-					<br>
-					<br>
-
-					Explorez nos réalisations
-				</p>
-				<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-beige_chaud_clair" href="/contact">Nous contacter</a>
+	<section class="max-w-screen-2xl m-auto">
+		<article class="relative">
+			<div class="bg-beige_chaud_clair min-h-[711px] md:min-h-[423px] relative w-full"></div>
+			<img class="relative shadow-2xl rounded-2xl mt-[-593px] min-h-[50%] max-w-[643px] w-[calc(100%-10%)] ml-[5%] object-center object-cover md:mt-[-306px] md:ml-[calc(((100%-80%)/2))] lg:w-[60%] lg:max-w-[958px] lg:ml-[calc(((100%-90%)/2))]" src="images/static/hero-banner.webp" alt="Image d'un maçon qui monte un mur">
+			<div class="relative shadow-2xl bg-gris_ardoise max-w-[643px] rounded-2xl mt-5 w-[calc(100%-10%)] ml-[5%] md:w-[625px] md:mt-[-60px] md:mr-[calc(((100%-70%)/2))]  md:ml-auto lg:w-[60%] lg:mt-[-280px] lg:max-w-[958px] lg:mr-[calc(((100%-90%)/2))]">
+				<div class="p-4 ">
+					<h1>Bienvenue chez Maçonnerie ProBuild</h1>
+					<p class="my-4">Notre Art, Votre Espoir, Réalisé en Pierre
+						<br>
+						<br>
+						Chez Maçonnerie ProBuild, nous croyons en la puissance de la maçonnerie pour transformer vos rêves en réalité. Chaque brique, chaque pierre que nous posons est imprégnée de notre engagement envers l'excellence et la durabilité. Nous façonnons votre espoir en une réalité solide qui durera des générations.
+						<br>
+						<br>
+						Explorez nos réalisations
+					</p>
+					<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-beige_chaud_clair" href="/contact">Nous contacter</a>
+				</div>
 			</div>
-		</div>
+		</article>
+		{# service #}
+		<article class="text-center bg-beige_chaud_clair py-8 mt-8">
+			<h2 class="my-12">Nos Services</h2>
+
+			<div class="w-full flex gap-8 flex-col md:flex-row md:justify-center">
+				<img class=" md:w-[calc((100%/3)-(32px*2))] object-cover object-center " src="images/static/service-1.webp" alt="">
+				<ul class="flex flex-col gap-8 flex-[1 1 300px] md:w-[calc((100%/3)-(32px*2))]">
+					<li>
+						- Construction de murs en briques et en pierres
+					</li>
+					<li>
+						- Rénovation de cheminées
+					</li>
+					<li>
+						- Aménagement paysager en maçonnerie
+					</li>
+					<li>
+						- Création de patios et de terrasses
+					</li>
+				</ul>
+				<img class="md:w-[calc((100%/3)-(32px*2))]  object-cover object-center" src="images/static/service-2.webp" alt="">
+			</div>
+			<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="/nos-services">Explorer nos services</a>
+		</article>
 	</section>
-    {# service #}
-    <section>
-        
-    </section>
 {% endblock %}
