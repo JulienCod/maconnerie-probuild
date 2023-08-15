@@ -18,40 +18,39 @@
 * {
   font-family: lato-regular;
 }
+h1,h1,h3,h4{
+  font-family: montserrat;
+}
 
 h1 {
-  font-size: 50px;
-  font-family: montserrat;
+  font-size: 32px;
 }
 h2 {
-  font-size: 38px;
-  font-family: montserrat;
+  font-size: 28px;
 }
 h3 {
-  font-size: 28px;
-  font-family: montserrat;
+  font-size: 24px;
 }
 h4 {
-  font-size: 21px;
-  font-family: montserrat;
+  font-size: 18px;
 }
 
+@media (min-width: 768px) {
+  *{
+    font-size: 18px;
+  }
+  h1 {
+    font-size: 48px;
+  }
+  h2 {
+    font-size: 42px;
+  }
+  h3 {
+    font-size: 35px;
+  }
+  h4 {
+    font-size: 28px;
+  }
 
-  .test{
-    /* position: absolute;
-    -webkit-transition: all 0.35s ease;
-    transition: all 0.35s ease; */
-    left: 0;
-    top: 0;
-    padding: 0.5em 0;
-    position: absolute;
-    content: attr(data-hover);
-    color: #ffffff;
-    white-space: nowrap;
-    max-width: 0%;
-    overflow: hidden;
-  }
-  .current {
-    max-width: 100%;
-  }
   
+}
