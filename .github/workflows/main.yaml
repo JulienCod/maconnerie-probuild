@@ -32,6 +32,9 @@ jobs:
           yarn build
           # Ajoutez ici les étapes nécessaires pour déployer votre application (par exemple, transfert des fichiers construits vers le serveur).
       
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+      
       - name: Prepare Deployment
         run: |
           # Copy necessary files excluding node_modules, var, and vendor folders
