@@ -42,8 +42,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           sftpArgs: -r
           port: ${{ secrets.PORT }}
-          local_path: /github/workspace/deployment/*
-          
+
       - name: Set Up Symfony Production Environment
         run: |
           # Create Doctrine database
