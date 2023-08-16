@@ -32,13 +32,10 @@ jobs:
           yarn build
           # Ajoutez ici les étapes nécessaires pour déployer votre application (par exemple, transfert des fichiers construits vers le serveur).
       
-      - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync
-      
       - name: Prepare Deployment
         run: |
           # Copy necessary files excluding node_modules, var, and vendor folders
-          rsync -av --exclude=node_modules --exclude=var --exclude=vendor ./ ${{ github.workspace }}/deployment
+          --exclude=node_modules --exclude=var --exclude=vendor ./ ${{ github.workspace }}/deployment
 
       - name: Upload to server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
