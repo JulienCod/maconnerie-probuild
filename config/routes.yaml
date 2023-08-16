@@ -3,3 +3,6 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+send_mail:
+    path: /send-mail
+    controller: App\Controller\Service\MailController::sendMail
