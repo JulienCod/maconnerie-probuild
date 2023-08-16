@@ -35,8 +35,7 @@ jobs:
       - name: Prepare Deployment
         run: |
           # Copy necessary files excluding node_modules, var, and vendor folders
-          mkdir -p ${{ github.workspace }}/deployment
-          cp -R ./* ${{ github.workspace }}/deployment/
+          
           rm -rf ${{ github.workspace }}/deployment/node_modules
           rm -rf ${{ github.workspace }}/deployment/var
           rm -rf ${{ github.workspace }}/deployment/vendor
