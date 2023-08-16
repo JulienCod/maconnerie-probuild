@@ -1,0 +1,67 @@
+name: CI/CD for symfony 6 App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js and Yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install Yarn
+        run: npm install -g yarn --ignore-scripts
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build and deploy
+        run: |
+          yarn build
+          # Ajoutez ici les étapes nécessaires pour déployer votre application (par exemple, transfert des fichiers construits vers le serveur).
+      
+      - name: Prepare Deployment
+        run: |
+          # Copy necessary files excluding node_modules, var, and vendor folders
+          rsync -av --exclude=node_modules --exclude=var --exclude=vendor ./ ${{ github.workspace }}/deployment
+
+      - name: Upload to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          remote_path: ${{ secrets.PATH }}
+          server: ${{ secrets.IP }}
+          username: ${{ secrets.USER }}
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          password: ${{ secrets.PASSWORD }}
+          sftpArgs: -r
+          port: ${{ secrets.PORT }}
+          local_path: ${{ github.workspace }}/deployment/*
+
+      - name: Set Up Symfony Production Environment
+        run: |
+          # Create Doctrine database
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USER }}@${{ secrets.SERVER }} "cd ${{ secrets.PATH }} && php bin/console doctrine-database-create --no-interaction"
+
+          # Run Doctrine migrations
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USER }}@${{ secrets.SERVER }} "cd ${{ secrets.PATH }} && php bin/console doctrine:migrations:migrate --no-interaction"
+
+          # Install Symfony Apache pack
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USER }}@${{ secrets.SERVER }} "cd ${{ secrets.PATH }} && composer require symfony/apache-pack"
+
+          # Dump .env file for production
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USER }}@${{ secrets.SERVER }} "cd ${{ secrets.PATH }} && composer dump-env prod"
+
+          # Install dependencies for production
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USER }}@${{ secrets.SERVER }} "cd ${{ secrets.PATH }} && composer install --no-dev --optimize-autoloader"
+
+          # Clear cache
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ secrets.USER }}@${{ secrets.SERVER }} "cd ${{ secrets.PATH }} && APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear"
