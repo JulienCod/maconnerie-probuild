@@ -59,6 +59,9 @@ class Contact
     #[ORM\Column(length: 255)]
     private ?string $securityQuestion = null;
 
+    #[ORM\Column]
+    private ?bool $IsView = null;
+
 
     public function __construct()
     {
@@ -174,6 +177,18 @@ class Contact
     public function setSecurityQuestion(string $securityQuestion): static
     {
         $this->securityQuestion = $securityQuestion;
+
+        return $this;
+    }
+
+    public function isIsView(): ?bool
+    {
+        return $this->IsView;
+    }
+
+    public function setIsView(bool $IsView): static
+    {
+        $this->IsView = $IsView;
 
         return $this;
     }

@@ -1,0 +1,32 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block title %}Gestion des contacts
+{% endblock %}
+
+{% block body %}
+	<article class="px-2 md:px-8">
+		<h1 class="text-center ">Message de
+			{{ contact.fullName }}</h1>
+		<div class="flex justify-between my-4">
+			<p>Numéro de téléphone :
+				{{ contact.phoneNumber }}</p>
+			<p>Mail :
+				{{ contact.email }}</p>
+			<p>Reçu le :
+				{{ contact.createdAt }}</p>
+			<p>Objet :
+				{{ contact.subject }}</p>
+		</div>
+		<div class="my-4">
+			<h4 class="mb-8">Message :</h4>
+			<p>
+				{{contact.content}}
+			</p>
+		</div>
+
+		<div class="flex justify-around my-4">
+			<a type="button" class="p-4 bg-blue-500 rounded-xl text-white shadow-xl" href="#">Répondre</a>
+			<a type="button" class="p-4 bg-red-500 rounded-xl text-white shadow-xl" href="/admin/contact/{{contact.id}}/supprimer">Supprimer</a>
+		</div>
+	</article>
+{% endblock %}
