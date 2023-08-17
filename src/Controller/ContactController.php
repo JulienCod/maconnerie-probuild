@@ -34,20 +34,20 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            // Utilisez la fonction strip_tags pour supprimer les balises HTML indésirables
-            $sanitizedMessage = strip_tags($form->getData()->getContent());
+            // Décommenter les lignes suivantes pour la production 
+            // $sanitizedMessage = strip_tags($form->getData()->getContent());
 
-            $mail->send(
-                $form->getData()->getEmail(),
-                'contact@maconnerie-probuild.fr',
-                $form->getData()->getSubject(),
-                'contact',
-                [
-                    "phoneNumber" => $form->getData()->getPhoneNumber(),
-                    "fullName" => $form->getData()->getFullName(),
-                    "message" => $sanitizedMessage,
-                ]
-            );
+            // $mail->send(
+            //     $form->getData()->getEmail(),
+            //     'contact@maconnerie-probuild.fr',
+            //     $form->getData()->getSubject(),
+            //     'contact',
+            //     [
+            //         "phoneNumber" => $form->getData()->getPhoneNumber(),
+            //         "fullName" => $form->getData()->getFullName(),
+            //         "message" => $sanitizedMessage,
+            //     ]
+            // );
 
             $this->addFlash('success', 'Votre email a été envoyer');
 
