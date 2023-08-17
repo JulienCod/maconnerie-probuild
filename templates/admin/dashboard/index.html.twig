@@ -1,0 +1,17 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block title %}Tableau de bord
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">tableau de bord Maçonnerie ProBuild</h1>
+	<h2 class="text-center">Vue d'ensemble</h2>
+	<article>
+		<div>
+			<h3>Messagerie</h3>
+			<p>Vous avez
+				{{ countContact }}
+				Messages</p>
+		</div>
+	</article>
+{% endblock %}
