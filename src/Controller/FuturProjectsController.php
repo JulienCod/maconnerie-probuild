@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FuturProjectsController extends AbstractController
 {
-    #[Route('/projets-futurs', name: 'app_futur_projects')]
+    #[Route('/nos-réalisations', name: 'app_portfolio')]
     public function index(): Response
     {
-        return $this->render('pages/futur-projects.html.twig');
+        return $this->render('pages/portfolio.html.twig');
     }
 }
