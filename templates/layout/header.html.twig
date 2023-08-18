@@ -14,19 +14,19 @@
 			<div class="hidden w-full md:block md:w-auto" id="navbar-default">
 				<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-1 lg:space-x-8 md:mt-0 md:border-0">
 					<li>
-						<a href="/" class="block p-2 rounded hover:bg-beige_chaud">Accueil</a>
+						<a href="{{ path('app_home') }}" class="block p-2 rounded hover:bg-beige_chaud">Accueil</a>
 					</li>
 					<li>
-						<a href="/services" class="block  p-2 rounded hover:bg-beige_chaud">Services</a>
+						<a href="{{ path('app_services') }}" class="block  p-2 rounded hover:bg-beige_chaud">Services</a>
 					</li>
 					<li>
-						<a href="/a-propos" class="block  p-2 rounded hover:bg-beige_chaud">À propos</a>
+						<a href="{{ path('app_about') }}" class="block  p-2 rounded hover:bg-beige_chaud">À propos</a>
 					</li>
 					<li>
-						<a href="/projets-futurs" class="block  p-2 rounded hover:bg-beige_chaud">Projets futurs</a>
+						<a href="{{ path('app_futur_projects') }}" class="block  p-2 rounded hover:bg-beige_chaud">Projets futurs</a>
 					</li>
 					<li>
-						<a href="/contact" class="block p-2 rounded hover:bg-beige_chaud">Contact</a>
+						<a href="{{ path('app_contact') }}" class="block p-2 rounded hover:bg-beige_chaud">Contact</a>
 					</li>
 				</ul>
 			</div>
