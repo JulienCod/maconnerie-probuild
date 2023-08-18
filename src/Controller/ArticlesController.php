@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\Images;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
+use App\Service\PictureService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +25,28 @@ class ArticlesController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, PictureService $pictureService): Response
     {
         $article = new Articles();
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //on récupère les images
+            $images = $form->get('images')->getData();
+            foreach ($images as $image) {
+                // on défibir ke dossier de destination
+                $folder = 'articles';
+
+                // on appelle le service d'ajout
+                $fichier = $pictureService->add($image, $folder, 300, 300);
+
+                $img = new Images();
+                $img->setName($fichier);
+                $article->addImage($img);
+                
+            }
+
             $entityManager->persist($article);
             $entityManager->flush();
 

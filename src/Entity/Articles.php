@@ -34,7 +34,7 @@ class Articles
     #[ORM\ManyToMany(targetEntity: Categories::class, mappedBy: 'article')]
     private Collection $categories;
 
-    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Images::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Images::class, orphanRemoval: true, cascade:['persist'])]
     private Collection $images;
 
     public function __construct()

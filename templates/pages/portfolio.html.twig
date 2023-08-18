@@ -5,43 +5,52 @@
 
 {% block body %}
 	<section class="max-w-screen-2xl bg-beige_chaud_clair py-8 px-4 md:px-8">
-		<h1 class="text-center">Projets futurs</h1>
+		<h1 class="text-center">Nos Réalisations</h1>
 		<div class="py-4">
-			<h2 class="mb-8">Projets Futurs de Maçonnerie ProBuild</h2>
-			<p>
-				Chez Maçonnerie ProBuild, nous sommes constamment tournés vers l'avenir, prêts à entreprendre de nouveaux projets passionnants et innovants. Nous avons hâte de collaborer avec vous pour donner vie à vos idées et transformer vos rêves en réalité en utilisant notre expertise en maçonnerie.
+			<p class="text-center max-w-[75%] m-auto">
+				Découvrez ci-dessous quelques-unes de nos réussites passées dans le domaine de la maçonnerie. Chaque projet reflète notre engagement envers la qualité, l'innovation et le souci du détail.
 			</p>
 		</div>
-		<div class="py-4">
-			<h2 class="mb-8">Votre Vision, Notre Expertise</h2>
-			<p>
-				Chaque projet futur est une opportunité pour nous de mettre en œuvre notre expertise en maçonnerie et de créer des structures qui reflètent votre vision unique. Que vous envisagiez de créer un espace extérieur enchanteur, de rénover une cheminée ou de construire un mur en pierres, nous sommes prêts à relever le défi.
-			</p>
-		</div>
-		<div class="py-4">
-			<h2 class="mb-8">Collaboration Personnalisée</h2>
-			<p>
-				Nous comprenons que chaque projet est unique, c'est pourquoi nous travaillons en étroite collaboration avec vous pour comprendre vos besoins et vos attentes. Notre équipe de maçons qualifiés est là pour écouter vos idées, vous conseiller sur les meilleures options et transformer vos concepts en réalité concrète.
-			</p>
-		</div>
-		<div class="py-4">
-			<h2 class="mb-8">Innovation et Durabilité</h2>
-			<p>
-				L'innovation est au cœur de nos projets futurs. Nous sommes engagés à intégrer les dernières avancées techniques et les matériaux de qualité supérieure pour garantir que vos projets non seulement répondent à vos besoins actuels, mais résistent également à l'épreuve du temps.
-			</p>
-		</div>
-		<div class="py-4">
-			<h2 class="mb-8">Explorez Nos Réalisations Passées</h2>
-			<p>
-				Avant de plonger dans vos projets futurs, n'hésitez pas à explorer nos réalisations passées pour vous inspirer. Chaque projet que nous entreprenons est une vitrine de notre engagement envers l'excellence et la qualité.
-			</p>
-		</div>
-		<div class="py-4">
-			<h3 class="mb-8 text-center">Contactez-nous dès aujourd'hui pour discuter de vos projets futurs de maçonnerie.</h3>
-			<div class="flex justify-center">
-				<a type="button" class="my-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise shadow-md hover:shadow-xl" href="{{ path('app_contact') }}">fomulaire de contact</a>
-			</div>
-		</div>
+		{% if articles %}
+			{% for article in articles %}
+				<div class="p-10 flex">
+					<div class="max-w-sm rounded overflow-hidden shadow-lg">
+						<div
+							id="default-carousel" class="relative w-full" data-carousel="slide">
+							<!-- Carousel wrapper -->
+							<div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+								{% for image in article.images %}
+									<div class="hidden duration-700 ease-in-out" data-carousel-item>
+										<img src="{{ asset('assets/uploads/articles/mini/300x300-'~ image.name) }}" alt="{{ 'Image '~ article.title }}" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="px-6 py-4">
+							<div class="flex justify-between items-center">
+								<h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
+								<p>{{ article.createdAt ? article.createdAt|date('Y-m-d') : '' }}</p>
+							</div>
+							<div class="px-6 pt-4 pb-2">
+								{% for category in article.categories %}
+									<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{category}}</span>
+								{% endfor %}
+							</div>
+							<p class="text-gray-700 text-base">
+								{{ article.content }}
+							</p>
+						</div>
+						<div class="px-6 pt-4 pb-2">
+							{% for tag in article.tags %}
+								<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ tag }}</span>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			{% else %}
+			<h2 class="text-center">il n'y a pas de réalisation</h2>
+		{% endif %}
 
 	</section>
 {% endblock %}

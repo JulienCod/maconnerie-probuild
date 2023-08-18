@@ -19,7 +19,7 @@ class ArticlesType extends AbstractType
                 'label' => false,
                 'multiple' => true,
                 'mapped'=> false,
-                'required' => true,
+                'required' => false,
             ])
             ->add('tags')
             ->add('categories')
