@@ -11,6 +11,6 @@ class FuturProjectsController extends AbstractController
     #[Route('/projets-futurs', name: 'app_futur_projects')]
     public function index(): Response
     {
-        return $this->render('futur_projects/index.html.twig');
+        return $this->render('pages/futur-projects.html.twig');
     }
 }

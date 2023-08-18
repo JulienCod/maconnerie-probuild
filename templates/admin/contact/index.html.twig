@@ -80,10 +80,10 @@
 								{{ contact.subject }}
 							</td>
 							<td class="px-6 py-4 ">
-								<a href="/admin/contact/{{ contact.id }}" class="font-medium text-blue-500  hover:underline">Voir</a>
+								<a href="{{ path('admin_contact_view', {id: contact.id}) }}" class="font-medium text-blue-500  hover:underline">Voir</a>
 							</td>
 							<td class="px-6 py-4 text-right">
-								<a href="/admin/contact/{{ contact.id }}/supprimer" class="font-medium text-red-500  hover:underline">Supprimer</a>
+								<a href="{{ path('admin_contact_delete', {id: contact.id}) }}" class="font-medium text-red-500  hover:underline">Supprimer</a>
 							</td>
 						</tr>
 

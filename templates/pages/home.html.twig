@@ -4,8 +4,8 @@
 {% endblock %}
 
 {% block body %}
-	{# banniere #}
 	<section class="max-w-screen-2xl m-auto">
+	{# banniere #}
 		<article class="relative">
 			<div class="bg-beige_chaud_clair min-h-[711px] md:min-h-[423px] relative w-full"></div>
 			<img class="relative shadow-2xl rounded-2xl mt-[-593px] min-h-[50%] max-w-[643px] w-[calc(100%-10%)] ml-[5%] object-center object-cover md:mt-[-306px] md:ml-[calc(((100%-80%)/2))] lg:w-[60%] lg:max-w-[958px] lg:ml-[calc(((100%-90%)/2))]" src="images/static/hero-banner.webp" alt="Image d'un maçon qui monte un mur">
@@ -18,9 +18,8 @@
 						Chez Maçonnerie ProBuild, nous croyons en la puissance de la maçonnerie pour transformer vos rêves en réalité. Chaque brique, chaque pierre que nous posons est imprégnée de notre engagement envers l'excellence et la durabilité. Nous façonnons votre espoir en une réalité solide qui durera des générations.
 						<br>
 						<br>
-						Explorez nos réalisations
 					</p>
-					<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-beige_chaud_clair" href="/contact">Nous contacter</a>
+					<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-beige_chaud_clair" href="{{ path('app_contact') }}">Nous contacter</a>
 				</div>
 			</div>
 		</article>
@@ -47,7 +46,7 @@
 				</ul>
 				<img class="md:w-[calc((100%/3)-(32px*2))]  object-cover object-center" src="images/static/service-2.webp" alt="">
 			</div>
-			<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="/services">Explorer nos services</a>
+			<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_services')}}">Explorer nos services</a>
 		</article>
 		{# fin service #}
 
@@ -91,16 +90,16 @@
 				</div>
 				<!-- Slider controls -->
 				<button type="button" class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-					<span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-						<svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 6 10">
+					<span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white  group-focus:outline-none">
+						<svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 6 10">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
 						</svg>
 						<span class="sr-only">Retour</span>
 					</span>
 				</button>
 				<button type="button" class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-					<span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-						<svg class="w-4 h-4 text-white dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 6 10">
+					<span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+						<svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 6 10">
 							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
 						</svg>
 						<span class="sr-only">Suivant</span>
@@ -127,7 +126,7 @@
 					Approche personnelle à chaque projet
 				</li>
 			</ul>
-			<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="/a-propos">
+			<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_about') }}">
 				Découvrez ce qui nous distingue
 			</a>
 		</article>
@@ -139,7 +138,7 @@
 			<div class="px-2 flex flex-col gap-8 md:flex-row md:flex-wrap">
 				<aside class="border rounded-2xl p-4 shadow-lg md:w-[calc((100%/2)-32px)] lg:w-[calc((100%/4)-32px)]">
 					<div class="flex items-center mb-4 space-x-4">
-						<div class="space-y-1 font-medium dark:text-white">
+						<div class="space-y-1 font-medium">
 							<p>John D
 							</p>
 						</div>
@@ -160,16 +159,16 @@
 						<svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
 							<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
 						</svg>
-						<h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white">Impressionnant !</h3>
+						<h3 class="ml-2 text-sm font-semibold text-gray-900">Impressionnant !</h3>
 					</div>
-					<p class="mb-2 text-gray-500 dark:text-gray-400">
+					<p class="mb-2 text-gray-500">
 						Maçonnerie ProBuild a dépassé toutes nos attentes. Leur équipe professionnelle a travaillé avec diligence pour créer une magnifique terrasse en pierre qui est désormais le point central de nos réunions familiales. Nous ne pourrions pas être plus satisfaits.
 					</p>
 				</aside>
 
 				<aside class="border rounded-2xl p-4 shadow-lg md:w-[calc((100%/2)-32px)] lg:w-[calc((100%/4)-32px)]">
 					<div class="flex items-center mb-4 space-x-4">
-						<div class="space-y-1 font-medium dark:text-white">
+						<div class="space-y-1 font-medium">
 							<p>Anna M.
 							</p>
 						</div>
@@ -187,19 +186,19 @@
 						<svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
 							<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
 						</svg>
-						<svg class="w-4 h-4 text-gray-300 dark:text-gray-500 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
+						<svg class="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
 							<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
 						</svg>
-						<h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white">Exceptionnel !</h3>
+						<h3 class="ml-2 text-sm font-semibold text-gray-900 ">Exceptionnel !</h3>
 					</div>
-					<p class="mb-2 text-gray-500 dark:text-gray-400">
+					<p class="mb-2 text-gray-500 ">
 						Des maçons experts et un service impeccable. Maçonnerie ProBuild a transformé notre espace extérieur en une véritable œuvre d'art. Leur attention aux détails est remarquable et chaque pierre a été posée avec soin.
 					</p>
 				</aside>
 
 				<aside class="border rounded-2xl p-4 shadow-lg md:w-[calc((100%/2)-32px)] lg:w-[calc((100%/4)-32px)]">
 					<div class="flex items-center mb-4 space-x-4">
-						<div class="space-y-1 font-medium dark:text-white">
+						<div class="space-y-1 font-medium">
 							<p>David R.
 							</p>
 						</div>
@@ -217,19 +216,19 @@
 						<svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
 							<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
 						</svg>
-						<svg class="w-4 h-4 text-gray-300 dark:text-gray-500 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
+						<svg class="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
 							<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
 						</svg>
-						<h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white">Remarquable !</h3>
+						<h3 class="ml-2 text-sm font-semibold text-gray-900">Remarquable !</h3>
 					</div>
-					<p class="mb-2 text-gray-500 dark:text-gray-400">
+					<p class="mb-2 text-gray-500">
 						J'ai choisi Maçonnerie ProBuild pour rénover notre cheminée et c'était la meilleure décision que j'ai prise. Leur équipe a travaillé rapidement et avec une précision incroyable. La cheminée est non seulement fonctionnelle, mais elle ajoute également une touche d'élégance à notre maison.
 					</p>
 				</aside>
 
 				<aside class="border rounded-2xl p-4 shadow-lg md:w-[calc((100%/2)-32px)] lg:w-[calc((100%/4)-32px)]">
 					<div class="flex items-center mb-4 space-x-4">
-						<div class="space-y-1 font-medium dark:text-white">
+						<div class="space-y-1 font-medium">
 							<p>
 								Sarah W.
 							</p>
@@ -251,9 +250,9 @@
 						<svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewbox="0 0 22 20">
 							<path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
 						</svg>
-						<h3 class="ml-2 text-sm font-semibold text-gray-900 dark:text-white">Excellente expérience !</h3>
+						<h3 class="ml-2 text-sm font-semibold text-gray-900">Excellente expérience !</h3>
 					</div>
-					<p class="mb-2 text-gray-500 dark:text-gray-400">
+					<p class="mb-2 text-gray-500">
 						Des professionnels compétents et passionnés par leur métier. Maçonnerie ProBuild a construit un mur en pierres qui a résisté à l'épreuve du temps. Je suis extrêmement satisfait de leur travail et je les recommande vivement à tous ceux qui recherchent des maçons de confiance.
 					</p>
 				</aside>
@@ -265,7 +264,7 @@
         <article class="py-8 text-center bg-beige_chaud_clair">
             <h2>Contactez-nous</h2>
             <h3 class="my-8 w-[85%] m-auto">Des questions ? Besoin d'un devis ? Contactez-nous dès aujourd'hui pour discuter de vos projets de maçonnerie.</h3>
-            <a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="/contact">Contact</a>
+            <a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_contact') }}">Contact</a>
         </article>
         {# fin contact #}
 	</section>
