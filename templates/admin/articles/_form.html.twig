@@ -1,4 +1,18 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_widget(form) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+{% if app.request.attributes.get('_route') == 'app_articles_edit' %}
+	<h2>images</h2>
+	<div class="flex flex-wrap">
+	{% for image in article.images %}
+		<div class="flex">
+			<img src="{{ asset('assets/uploads/articles/mini/300x300-'~ image.name)}}" alt="image">
+			<form method="POST" action="{{ path('app_articles_delete_image', {id: image.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette image?');">
+				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
+				<button class="p-4 bg-red-500 rounded-2xl text-white hover:bg-red-800">Supprimer</button>
+			</form>
+		</div>
+	{% endfor %}
+	</div>
+{% endif %}
