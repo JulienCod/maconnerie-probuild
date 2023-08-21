@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Articles;
+use App\Entity\Categories;
 use App\Entity\Images;
+use App\Entity\Tags;
 use App\Form\ArticlesType;
 use App\Repository\ArticlesRepository;
 use App\Service\PictureService;
@@ -46,6 +48,19 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $tags = $form->get('tags')->getData();
+            foreach ($tags as $tag)
+            {
+                $article->addTag($tag);
+            }
+
+            $categories = $form->get('categories')->getData();
+            foreach ($categories as $category)
+            {
+                $article->addCategory($category);
+            }
+            
             //on récupère les images
             $images = $form->get('images')->getData();
             foreach ($images as $image) {
@@ -60,9 +75,16 @@ class ArticlesController extends AbstractController
                 $article->addImage($img);
 
             }
-
-            $this->entityManager->persist($article);
-            $this->entityManager->flush();
+            // dd($article);
+            dump($article);
+            try {
+                $this->entityManager->persist($article);
+                $this->entityManager->flush();
+            } catch (\Exception $e) {
+                // Afficher ou enregistrer l'exception selon vos besoins
+                dump($e->getMessage());
+                die();
+            }
 
             return $this->redirectToRoute('app_articles_index', [], Response::HTTP_SEE_OTHER);
         }

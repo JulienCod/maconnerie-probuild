@@ -11,6 +11,7 @@
 				Découvrez ci-dessous quelques-unes de nos réussites passées dans le domaine de la maçonnerie. Chaque projet reflète notre engagement envers la qualité, l'innovation et le souci du détail.
 			</p>
 		</div>
+		<div class='flex flex-wrap'>
 		{% if articles %}
 			{% for article in articles %}
 				<div class="p-10 flex">
@@ -33,7 +34,7 @@
 							</div>
 							<div class="px-6 pt-4 pb-2">
 								{% for category in article.categories %}
-									<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{category}}</span>
+									<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{category.name}}</span>
 								{% endfor %}
 							</div>
 							<p class="text-gray-700 text-base">
@@ -42,7 +43,7 @@
 						</div>
 						<div class="px-6 pt-4 pb-2">
 							{% for tag in article.tags %}
-								<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ tag }}</span>
+								<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ tag.name }}</span>
 							{% endfor %}
 						</div>
 					</div>
@@ -51,6 +52,7 @@
 			{% else %}
 			<h2 class="text-center">il n'y a pas de réalisation</h2>
 		{% endif %}
+		</div>
 
 	</section>
 {% endblock %}

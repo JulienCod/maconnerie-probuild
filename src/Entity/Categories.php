@@ -18,12 +18,12 @@ class Categories
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Articles::class, inversedBy: 'categories')]
-    private Collection $article;
+    #[ORM\ManyToMany(targetEntity: Articles::class, mappedBy: 'categories')]
+    private Collection $articles;
 
     public function __construct()
     {
-        $this->article = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -46,15 +46,16 @@ class Categories
     /**
      * @return Collection<int, Articles>
      */
-    public function getArticle(): Collection
+    public function getArticles(): Collection
     {
-        return $this->article;
+        return $this->articles;
     }
 
     public function addArticle(Articles $article): static
     {
-        if (!$this->article->contains($article)) {
-            $this->article->add($article);
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->addCategory($this);
         }
 
         return $this;
@@ -62,8 +63,11 @@ class Categories
 
     public function removeArticle(Articles $article): static
     {
-        $this->article->removeElement($article);
+        if ($this->articles->removeElement($article)) {
+            $article->removeCategory($this);
+        }
 
         return $this;
     }
+
 }

@@ -28,22 +28,22 @@ class Articles
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\ManyToMany(targetEntity: Tags::class, mappedBy: 'article')]
-    private Collection $tags;
-
-    #[ORM\ManyToMany(targetEntity: Categories::class, mappedBy: 'article')]
-    private Collection $categories;
-
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Images::class, orphanRemoval: true, cascade:['persist'])]
     private Collection $images;
 
+    #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'articles', cascade:['persist'])]
+    private Collection $tags;
+
+    #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'articles', cascade:['persist'])]
+    private Collection $categories;
+
     public function __construct()
     {
-        $this->tags = new ArrayCollection();
-        $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->setCreatedAt(new \DateTimeImmutable);
         $this->setUpdatedAt(new \DateTimeImmutable);
+        $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,60 +100,6 @@ class Articles
     }
 
     /**
-     * @return Collection<int, Tags>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tags $tag): static
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
-            $tag->addArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tags $tag): static
-    {
-        if ($this->tags->removeElement($tag)) {
-            $tag->removeArticle($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Categories>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categories $category): static
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categories $category): static
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeArticle($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Images>
      */
     public function getImages(): Collection
@@ -179,6 +125,54 @@ class Articles
                 $image->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tags>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tags $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tags $tag): static
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categories>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categories $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categories $category): static
+    {
+        $this->categories->removeElement($category);
 
         return $this;
     }
