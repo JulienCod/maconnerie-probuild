@@ -9,9 +9,9 @@
 
 	<div class="p-10 flex justify-center">
 		<div class="max-w-sm rounded overflow-hidden shadow-lg">
-		{% if article.images %}
-			<img class="w-full" src="{{ asset('assets/uploads/articles/mini/300x300-'~ article.images[0].name) }}" alt="{{ 'Image '~ article.title }}">
-		{% endif %}
+			{% if article.images %}
+				<img class="w-full" src="{{ asset('assets/uploads/articles/mini/300x300-'~ article.images[0].name) }}" alt="{{ 'Image '~ article.title }}">
+			{% endif %}
 			<div class="px-6 py-4">
 				<div class="flex justify-between items-center">
 					<h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>

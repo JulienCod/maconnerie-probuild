@@ -5,22 +5,36 @@
 {% block body %}
     <h1>Catégories</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ category.name }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+		<thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+			<tr>
+				<th scope="col" class="px-6 py-3">
+					Identifiant
+				</th>
+				<th scope="col" class="px-6 py-3">
+					Nom
+				</th>
+				<th scope="col" class="px-6 py-3">
+					Action
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+				<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+					{{ category.id }}
+				</th>
+				<td class="px-6 py-4">
+					{{ category.name }}
+				</td>
+				<td class="px-6 py-4 flex flex-col gap-2 items-center">
+					<a type="button" href="{{ path('admin_categories_index') }}" class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Retour à la liste des catégories</a>
 
-    <a href="{{ path('admin_categories_index') }}">Retour à la liste des catégories</a>
+					<a type="button" href="{{ path('admin_categories_edit', {'id': category.id}) }}" class="p-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-800">Modifier la catégorie</a>
 
-    <a href="{{ path('admin_categories_edit', {'id': category.id}) }}">Modifier la catégorie</a>
-
-    {{ include('admin/categories/_delete_form.html.twig') }}
+					{{ include('admin/categories/_delete_form.html.twig') }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
 {% endblock %}

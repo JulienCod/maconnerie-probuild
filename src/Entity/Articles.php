@@ -19,13 +19,13 @@ class Articles
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $content = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable:true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Images::class, orphanRemoval: true, cascade:['persist'])]
@@ -40,8 +40,6 @@ class Articles
     public function __construct()
     {
         $this->images = new ArrayCollection();
-        $this->setCreatedAt(new \DateTimeImmutable);
-        $this->setUpdatedAt(new \DateTimeImmutable);
         $this->tags = new ArrayCollection();
         $this->categories = new ArrayCollection();
     }

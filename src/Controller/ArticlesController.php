@@ -48,6 +48,7 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setCreatedAt(new \DateTimeImmutable);
 
             $tags = $form->get('tags')->getData();
             foreach ($tags as $tag)
@@ -75,8 +76,6 @@ class ArticlesController extends AbstractController
                 $article->addImage($img);
 
             }
-            // dd($article);
-            dump($article);
             try {
                 $this->entityManager->persist($article);
                 $this->entityManager->flush();
@@ -110,6 +109,20 @@ class ArticlesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setUpdatedAt(new \DateTimeImmutable);
+
+            $tags = $form->get('tags')->getData();
+            foreach ($tags as $tag)
+            {
+                $article->addTag($tag);
+            }
+
+            $categories = $form->get('categories')->getData();
+            foreach ($categories as $category)
+            {
+                $article->addCategory($category);
+            }
+
             $images = $form->get('images')->getData();
             foreach ($images as $image) {
                 // on défibir ke dossier de destination

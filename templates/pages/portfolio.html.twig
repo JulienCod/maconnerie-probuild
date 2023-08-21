@@ -4,54 +4,54 @@
 {% endblock %}
 
 {% block body %}
-	<section class="max-w-screen-2xl bg-beige_chaud_clair py-8 px-4 md:px-8">
+	<section class="max-w-screen-2xl bg-beige_chaud_clair py-8 px-4 md:px-8 m-auto">
 		<h1 class="text-center">Nos Réalisations</h1>
 		<div class="py-4">
 			<p class="text-center max-w-[75%] m-auto">
 				Découvrez ci-dessous quelques-unes de nos réussites passées dans le domaine de la maçonnerie. Chaque projet reflète notre engagement envers la qualité, l'innovation et le souci du détail.
 			</p>
 		</div>
-		<div class='flex flex-wrap'>
-		{% if articles %}
-			{% for article in articles %}
-				<div class="p-10 flex">
-					<div class="max-w-sm rounded overflow-hidden shadow-lg">
-						<div
-							id="default-carousel" class="relative w-full" data-carousel="slide">
-							<!-- Carousel wrapper -->
-							<div class="relative h-72 overflow-hidden rounded-lg ">
-								{% for image in article.images %}
-									<div class="hidden duration-700 ease-in-out" data-carousel-item>
-										<img src="{{ asset('assets/uploads/articles/mini/300x300-'~ image.name) }}" alt="{{ 'Image '~ article.title }}" class="absolute object-cover block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-									</div>
-								{% endfor %}
+		<div class='flex flex-wrap justify-between'>
+			{% if articles %}
+				{% for article in articles %}
+					<div class="p-4 flex">
+						<div class="max-w-sm rounded overflow-hidden shadow-lg">
+							<div
+								id="default-carousel" class="relative w-full" data-carousel="slide">
+								<!-- Carousel wrapper -->
+								<div class="relative h-72 overflow-hidden rounded-lg">
+									{% for image in article.images %}
+										<div class="hidden duration-700 ease-in-out" data-carousel-item>
+											<img src="{{ asset('assets/uploads/articles/mini/300x300-'~ image.name) }}" alt="{{ 'Image '~ article.title }}" class="absolute object-cover block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+										</div>
+									{% endfor %}
+								</div>
 							</div>
-						</div>
-						<div class="px-6 py-4">
-							<div class="flex justify-between items-center">
-								<h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
-								<p>{{ article.createdAt ? article.createdAt|date('Y-m-d') : '' }}</p>
+							<div class="p-4">
+								<div class="flex justify-between items-center">
+									<h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
+									<p>{{ article.createdAt ? article.createdAt|date('Y-m-d') : '' }}</p>
+								</div>
+								<div class="flex justify-start flex-wrap">
+									{% for category in article.categories %}
+										<span class="inline-block bg-gris_ardoise_clair rounded-full p-2 text-sm font-semibold text-gray-700 my-2">{{category.name}}</span>
+									{% endfor %}
+								</div>
+								<p class="text-gray-700 text-base">
+									{{ article.content }}
+								</p>
+								<div class="flex flex-wrap justify-start">
+									{% for tag in article.tags %}
+										<span class="inline-block bg-gray-200 rounded-full p-2 text-sm font-semibold text-gray-700 my-2">{{ tag.name }}</span>
+									{% endfor %}
+								</div>
 							</div>
-							<div class="px-6 pt-4 pb-2">
-								{% for category in article.categories %}
-									<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{category.name}}</span>
-								{% endfor %}
-							</div>
-							<p class="text-gray-700 text-base">
-								{{ article.content }}
-							</p>
-						</div>
-						<div class="px-6 pt-4 pb-2">
-							{% for tag in article.tags %}
-								<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ tag.name }}</span>
-							{% endfor %}
 						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
 			{% else %}
-			<h2 class="text-center">il n'y a pas de réalisation</h2>
-		{% endif %}
+				<h2 class="text-center">il n'y a pas de réalisation</h2>
+			{% endif %}
 		</div>
 
 	</section>

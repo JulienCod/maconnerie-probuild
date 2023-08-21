@@ -1,11 +1,14 @@
 {% extends 'admin/adminBase.html.twig' %}
 
-{% block title %}Nouvelle catégories{% endblock %}
+{% block title %}Nouvelle catégories
+{% endblock %}
 
 {% block body %}
-    <h1>Créer une nouvelle catégorie</h1>
+	<h1 class="text-center p-4">Créer une nouvelle catégorie</h1>
+	<div class="flex justify-end">
+		<a type="button" href="{{ path('admin_categories_index') }}" class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Retour à la liste des catégories</a>
+	</div>
 
-    {{ include('admin/categories/_form.html.twig') }}
+	{{ include('admin/categories/_form.html.twig') }}
 
-    <a href="{{ path('admin_categories_index') }}">back to list</a>
 {% endblock %}
