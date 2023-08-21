@@ -1,6 +1,6 @@
 {{ form_start(form) }}
 {{ form_widget(form) }}
-<button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+<button class="p-2 bg-blue-500 mt-4 text-white rounded-2xl hover:bg-blue-800">{{ button_label|default('Sauvegarder') }}</button>
 {{ form_end(form) }}
 {% if app.request.attributes.get('_route') == 'app_articles_edit' %}
 	<h2>images</h2>
