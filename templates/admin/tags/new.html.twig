@@ -1,0 +1,13 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block title %}Nouveau tag
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Créer un nouveau tag</h1>
+	<div class="flex justify-end">
+		<a type="button" href="{{ path('admin_tags_index') }}" class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Retour à la liste des tags</a>
+	</div>
+	{{ include('admin/tags/_form.html.twig') }}
+
+{% endblock %}

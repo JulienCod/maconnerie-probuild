@@ -1,0 +1,63 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block title %}Liste des articles
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Liste des articles</h1>
+	<div class="flex justify-end">
+		<a href="{{ path('app_articles_new') }}" class="p-2 bg-green-500 text-white rounded-2xl hover:bg-green-800">Créer un nouvelle article</a>
+	</div>
+	{% if articles %}
+		<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+			<table class="w-full text-sm text-left text-gray-500 ">
+				<thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
+					<tr>
+						<th scope="col" class="px-6 py-3">
+							Titre
+						</th>
+						<th scope="col" class="px-6 py-3">
+							Contenu
+						</th>
+						<th scope="col" class="px-6 py-3">
+							Créer le
+						</th>
+						<th scope="col" class="px-6 py-3">
+							Modifier le
+						</th>
+						<th scope="col" class="px-6 py-3">
+							actions
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for article in articles %}
+						<tr class="bg-white border-b max-h-8">
+							<th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+								{{ article.title }}
+							</th>
+							<td class="px-6 py-4">
+								{{ article.content }}
+							</td>
+							<td class="px-6 py-4">
+								{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}
+							</td>
+							<td class="px-6 py-4">
+								{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}
+							</td>
+							<td class="px-6 py-4 flex flex-col gap-2 text-center">
+								<a type="button" href="{{ path('app_articles_show', {'id': article.id}) }}" class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Voir</a>
+								<a type="button" href="{{ path('app_articles_edit', {'id': article.id}) }}" class="p-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-800">Modifier</a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	{% else %}
+		<tr>
+			<td colspan="6">Il n'y a pas d'article</td>
+		</tr>
+	{% endif %}
+
+{% endblock %}

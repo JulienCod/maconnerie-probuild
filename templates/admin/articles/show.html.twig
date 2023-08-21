@@ -1,0 +1,48 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block title %}Articles
+{% endblock %}
+
+{% block body %}
+	<h1 class="text-center">Vue de l'article
+		{{ article.title }}</h1>
+
+	<div class="p-10 flex justify-center">
+		<div class="max-w-sm rounded overflow-hidden shadow-lg">
+			{% if article.images %}
+				<img class="w-full" src="{{ asset('assets/uploads/articles/mini/300x300-'~ article.images[0].name) }}" alt="{{ 'Image '~ article.title }}">
+			{% endif %}
+			<div class="px-6 py-4">
+				<div class="flex justify-between items-center">
+					<h2 class="font-bold text-xl mb-2">{{ article.title }}</h2>
+					<p>{{ article.createdAt ? article.createdAt|date('Y-m-d') : '' }}</p>
+				</div>
+				<div class="px-6 pt-4 pb-2">
+					{% for category in article.categories %}
+						<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{category.name}}</span>
+					{% endfor %}
+				</div>
+				<p class="text-gray-700 text-base">
+					{{ article.content }}
+				</p>
+			</div>
+			<div class="px-6 pt-4 pb-2">
+				{% for tag in article.tags %}
+					<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{{ tag.name }}</span>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="flex justify-around">
+		<a href="{{ path('app_articles_index') }}">Retour à la liste</a>
+
+		<a class="text-blue-500" href="{{ path('app_articles_edit', {'id': article.id}) }}">Modifier</a>
+
+		<div class="text-red-500">
+			{{ include('admin/articles/_delete_form.html.twig') }}
+		</div>
+
+	</div>
+
+{% endblock %}

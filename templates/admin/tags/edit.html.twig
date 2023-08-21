@@ -1,0 +1,13 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block title %}Modification du tag{% endblock %}
+
+{% block body %}
+    <h1>Modification du tag</h1>
+
+    {{ include('admin/tags/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+
+    <a href="{{ path('admin_tags_index') }}">Retour à la liste des tags</a>
+
+    {{ include('admin/tags/_delete_form.html.twig') }}
+{% endblock %}

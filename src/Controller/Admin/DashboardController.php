@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Articles;
 use App\Entity\Contact;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,7 @@ class DashboardController extends AbstractController
     {
         // mettre en place un récapitulatif des données
         $countContact = count($entityManager->getRepository(Contact::class)->findAll());
-        return $this->render('admin/dashboard/index.html.twig',compact('countContact'));
+        $countArticle = count($entityManager->getRepository(Articles::class)->findAll());
+        return $this->render('admin/dashboard/index.html.twig',compact('countContact','countArticle'));
     }
 }
