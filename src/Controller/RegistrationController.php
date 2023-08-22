@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Options;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,24 +19,28 @@ class RegistrationController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher,
-        ): Response
-    {
+    ): Response {
+        // contrôle de l'autorisation de création d'un compte dans les options
+        $option = $entityManager->getRepository(Options::class)->findOneBy(['name' => 'inscription utilisateur']);
+        
+        if (!$option->isIsActive()) {
+            $this->addFlash('info', 'Les inscriptions au site ne sont pas disponible contacter le propriétaire du site pour activer les options nescessaire');
+            return $this->redirectToRoute('app_home');
+        }
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         $user->setRoles(['ROLE_USER']);
-        
-        if ($form->isSubmitted() && $form->isValid())
-        {
 
+        if ($form->isSubmitted() && $form->isValid()) {
             $hashedPassword = $passwordHasher->hashPassword($user, $form->get('password')->getData());
             $user->setPassword($hashedPassword);
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('app_home');
         }
-        return $this->render('pages/registration.html.twig',[
-            'form'=>$form->createView(),
+        return $this->render('pages/registration.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

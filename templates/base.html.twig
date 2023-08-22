@@ -14,8 +14,9 @@
         {% endblock %}
     </head>
     <body>
-        {% include "./layout/header.html.twig" %}
+        {% include("layout/_header.html.twig") %}
+        {% include("layout/_flash.html.twig") %}
         {% block body %}{% endblock %}
-        {% include "./layout/footer.html.twig" %}
+        {% include("layout/_footer.html.twig") %}
     </body>
 </html>

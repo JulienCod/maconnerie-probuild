@@ -125,7 +125,7 @@ class ArticlesController extends AbstractController
 
             $images = $form->get('images')->getData();
             foreach ($images as $image) {
-                // on défibir ke dossier de destination
+                // on défini le dossier de destination
                 $folder = 'articles';
 
                 // on appelle le service d'ajout
