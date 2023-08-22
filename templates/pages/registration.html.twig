@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	<section class="max-w-screen-2xl bg-beige_chaud m-auto">
+		<article class="p-8">
+			{% for message in app.flashes('success') %}
+				<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:text-green-400" role="alert">
+					{{ message }}
+				</div>
+			{% endfor %}
+			{% for message in app.flashes('danger') %}
+				<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+					{{ message}}
+				</div>
+			{% endfor %}
+			<h1 class="text-center mb-8">Inscription</h1>
+
+			<div class="flex flex-col gap-8 justify-around md:flex-row">
+				<div class="bg-gris_ardoise_clair p-8  rounded-2xl md:min-w-[calc((100%/2)-32px)] ">
+					{{ form_start(form) }}
+					<div class="relative z-0 w-full mb-6 group ">
+						{{ form_label(form.email) }}
+						{{ form_widget(form.email) }}
+						<div class="text-red-500">
+							{{ form_errors(form.email) }}
+						</div>
+					</div>
+					<div class="relative z-0 w-full mb-6 group ">
+						{{ form_label(form.password) }}
+						{{ form_widget(form.password) }}
+						<div class="text-red-500">
+							{{ form_errors(form.password) }}
+						</div>
+					</div>
+                    {{ form_row(form._token) }}
+					<button class="mt-2 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " type="submit">Envoyer</button>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</article>
+	</section>
+{% endblock %}
