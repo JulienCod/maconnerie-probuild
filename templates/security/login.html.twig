@@ -1,31 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in!
+{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<form method="post">
+		{% if error %}
+			<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+		{% if app.user %}
+			<div class="mb-3">
+				Vous êtes déjà connecter sur le compte
+				{{ app.user.userIdentifier }},
+				<a href="{{ path('app_logout') }}">Deconnexion</a>
+			</div>
+		{% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+		<h1 class="text-center my-8">Connexion</h1>
+		<div class="flex flex-col gap-8 justify-around md:flex-row mb-8">
+			<div class="bg-gris_ardoise_clair p-8  rounded-2xl md:min-w-[calc((100%/2)-32px)] ">
+				<div class="relative z-0 w-full mb-6 group ">
+					<label class="peer-focus:font-medium absolute font-bold text-lg text-brun_terreux duration-300 transform -translate-y-6 scale-75  -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" for="inputEmail">Email</label>
+					<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="block py-2.5 px-0 w-full text-brun_terreux bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" autocomplete="email" required autofocus>
+				</div>
+				<div class="relative z-0 w-full mb-6 group ">
+					<label class="peer-focus:font-medium absolute font-bold text-lg text-brun_terreux duration-300 transform -translate-y-6 scale-75  -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6" for="inputPassword">Mot de passe</label>
+					<input type="password" name="password" id="inputPassword" class="block py-2.5 px-0 w-full text-brun_terreux bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer" autocomplete="current-password" required>
+				</div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+				<button class="mt-2 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " type="submit">
+					Connexion
+				</button>
+			</div>
+		</div>
+	</form>
 {% endblock %}
