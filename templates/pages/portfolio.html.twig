@@ -4,13 +4,66 @@
 {% endblock %}
 
 {% block body %}
-	<section class="max-w-screen-2xl bg-beige_chaud_clair py-8 px-4 md:px-8 m-auto">
+	<section class=" bg-beige_chaud_clair ">
+		<article class="max-w-screen-2xl py-8 px-4 md:px-8 m-auto">
 		<h1 class="text-center">Nos Réalisations</h1>
 		<div class="py-4">
 			<p class="text-center max-w-[75%] m-auto">
 				Découvrez ci-dessous quelques-unes de nos réussites passées dans le domaine de la maçonnerie. Chaque projet reflète notre engagement envers la qualité, l'innovation et le souci du détail.
 			</p>
 		</div>
+
+		<!-- Modal toggle -->
+		<button data-modal-target="modal-filter" data-modal-toggle="modal-filter" class="block text-white bg-brun_terreux hover:bg-gris_ardoise shadow-2xl focus:ring-4 focus:outline-none font-medium rounded-lg px-5 py-2.5 text-center" type="button">
+			Filter les résultats
+		</button>
+
+		<!-- Main modal -->
+		<div id="modal-filter" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+			<div
+				class="relative w-full max-w-md max-h-full">
+				<!-- Modal content -->
+				<div class="relative bg-gris_ardoise_clair rounded-lg shadow">
+					<button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center" data-modal-hide="authentication-modal">
+						<svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 14 14">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+						</svg>
+						<span class="sr-only">Close modal</span>
+					</button>
+					{{ form_start(filterForm) }}
+					<div class="px-6 py-6 lg:px-8">
+					<h3 class="text-center">Filtrer les résultats</h3>
+						<div>
+							{{ form_label(filterForm.categories) }}
+						</div>
+						<div class="flex flex-wrap gap-x-4">
+							{% for category in filterForm.categories %}
+								<div class="flex items-center gap-1">
+									{{ form_label(category) }}
+									{{ form_widget(category) }}
+								</div>
+							{% endfor %}
+						</div>
+						<div class="text-xl ">
+							{{ form_label(filterForm.tags) }}
+						</div>
+						<div class="flex flex-wrap gap-x-4">
+							{% for tag in filterForm.tags %}
+								<div class="flex items-center gap-1">
+									{{ form_label(tag) }}
+									{{ form_widget(tag) }}
+								</div>
+							{% endfor %}
+						</div>
+						<div class="text-xl mt-4">
+							<button class="mt-2 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " type="submit">Filtrer</button>
+						</div>
+					</div>
+					{{ form_end(filterForm) }}
+				</div>
+			</div>
+		</div>
+
 		<div class='flex flex-wrap justify-between'>
 			{% if articles %}
 				{% for article in articles %}
@@ -53,6 +106,6 @@
 				<h2 class="text-center">il n'y a pas de réalisation</h2>
 			{% endif %}
 		</div>
-
+		</article>
 	</section>
 {% endblock %}
