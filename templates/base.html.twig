@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Maçonnerie ProBuild{% endblock %}</title>
-        <link rel="icon" href="images/logo/Maçonnerie-Probuild.svg">
+        <link rel="icon" href="{{asset('assets/images/logo/Maçonnerie-Probuild.svg')}}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -14,8 +14,9 @@
         {% endblock %}
     </head>
     <body>
-        {% include "./layout/header.html.twig" %}
+        {% include("layout/_header.html.twig") %}
+        {% include("layout/_flash.html.twig") %}
         {% block body %}{% endblock %}
-        {% include "./layout/footer.html.twig" %}
+        {% include("layout/_footer.html.twig") %}
     </body>
 </html>

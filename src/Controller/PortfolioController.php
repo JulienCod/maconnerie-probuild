@@ -2,23 +2,48 @@
 
 namespace App\Controller;
 
-use App\Entity\Articles;
+use App\Form\FilterFormType;
 use App\Repository\ArticlesRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PortfolioController extends AbstractController
 {
     #[Route('/nos-réalisations', name: 'app_portfolio')]
-    public function index(ArticlesRepository $articlesRepository): Response
+    public function index(ArticlesRepository $articlesRepository, Request $request): Response
     {
-        $dataArticles = $articlesRepository->findAll();
-        $articles = [];
+        // Créer le formulaire de filtrage
+        $form = $this->createForm(FilterFormType::class);
+        $form->handleRequest($request);
+        // Récupérer les articles en fonction des critères de filtrage
+        $criteriaTags = [];
+        $criteriaCategories = [];
+       
+        if ($form->isSubmitted()) {
+            $data = $form->getData();
+            $tags = $data['tags'];
+            foreach ($tags as $tag) {
+                $criteriaTags[] = $tag->getId();
+            }
 
-        foreach ($dataArticles as $dataArticle) {
-            // dd($dataArticle);
+            // Extraire les IDs des catégories sélectionnées
+            $categories = $data['categories'];
+            foreach ($categories as $category) {
+                $criteriaCategories[] = $category->getId();
+            }
+        }
+
+        if (empty($criteriaTags) && empty($criteriaCategories)) {
+            $filteredArticles = $articlesRepository->findAll();
+        } else {
+            $filteredArticles = $articlesRepository->findByCombinedCriteria($criteriaTags, $criteriaCategories);
+        }
+
+        // Préparer les données pour l'affichage
+        $articles = [];
+        foreach ($filteredArticles as $dataArticle) {
             $article = [
                 'title' => $dataArticle->getTitle(),
                 'content' => $dataArticle->getContent(),
@@ -33,7 +58,7 @@ class PortfolioController extends AbstractController
             }
             $article['tags'] = $tags;
 
-            $categories=[];
+            $categories = [];
             foreach ($dataArticle->getCategories() as $category) {
                 $categories[] = [
                     'name' => $category->getName(),
@@ -41,9 +66,13 @@ class PortfolioController extends AbstractController
             }
             $article['categories'] = $categories;
 
-            // dd($article);
-            $articles[] =$article;
+            $articles[] = $article;
         }
-        return $this->render('pages/portfolio.html.twig', compact('articles'));
+
+        return $this->render('pages/portfolio.html.twig', [
+            'articles' => $articles,
+            'filterForm' => $form->createView(), // Pass the form to the template
+        ]);
     }
+
 }
