@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactFormType;
+use App\Service\BruteForceService;
 use App\Service\SendMailService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -24,60 +25,68 @@ class ContactController extends AbstractController
     public function index(
         Request $request,
         EntityManagerInterface $entityManager,
-        SendMailService $mail
+        SendMailService $mail,
+        BruteForceService $bruteForceService,
     ): Response {
         try {
+            //récupération de l'adresse Ip
             $ip = $request->getClientIp();
+            // Vérification si l'adresse ip est banni
+            $isBan = $bruteForceService->controlIsBan($ip);
+            
+            if ($isBan) {
+                $this->addFlash('alert', 'Vous avez été banni vous ne pouvez plus utiliser les formulaires présent sur ce site');
+                return $this->redirectToRoute('app_home');
+            }
+            
             $cacheKey = 'contact_form_submissions_' . $ip;
-
             $cacheItem = $this->cache->getItem($cacheKey);
             $submissions = $cacheItem->get() ?? 0;
-
-            // définition des limitations 5 envoie pour 24 heures
+            
+            // définition des limitations 5 envoie pour 1 heure
             $submissionLimit = 5;
-            $expirationTime = 86400; // 24 heures en secondes
-
-            if ($submissions >= $submissionLimit) {
-                $this->addFlash('warning', 'Vous avez atteint le nombre limite d\'envoi');
-                return $this->redirectToRoute('app_contact');
-            }
-
+            $expirationTime = 3600; // 1 heure en secondes
+            
             $contact = new Contact();
+            $contact->setIsView(false);
             $form = $this->createForm(ContactFormType::class, $contact);
             $form->handleRequest($request);
             $honeyPot = $form->getData()->getHoneypot();
-
+            
             if ($honeyPot != null) {
-                $this->addFlash('danger', 'Votre email n\'a pas été envoyé car il a été considéré comme spam');
+                $this->addFlash('alert', 'Votre email n\'a pas été envoyé car il a été considéré comme spam');
                 return $this->redirectToRoute('app_contact');
-
             }
-
+            
             if ($form->isSubmitted() && $form->isValid()) {
-                //
                 $cacheItem->set($submissions + 1);
                 $cacheItem->expiresAfter($expirationTime);
                 $this->cache->save($cacheItem);
 
+                if ($submissions >= $submissionLimit) {
+                    if($submissions >= $submissionLimit + 1 && !$isBan){
+                        $bruteForceService->logAttempt($ip);
+                    }
+                    $this->addFlash('warning', 'Vous avez atteint le nombre limite d\'envoi');
+                    return $this->redirectToRoute('app_contact');
+                }
+                
                 $contact = $form->getData();
-
                 $entityManager->persist($contact);
                 $entityManager->flush();
-
                 // Décommenter les lignes suivantes pour la production
-                // $sanitizedMessage = strip_tags($form->getData()->getContent());
-
-                // $mail->send(
-                //     $form->getData()->getEmail(),
-                //     'contact@maconnerie-probuild.fr',
-                //     $form->getData()->getSubject(),
-                //     'contact',
-                //     [
-                //         "phoneNumber" => $form->getData()->getPhoneNumber(),
-                //         "fullName" => $form->getData()->getFullName(),
-                //         "message" => $sanitizedMessage,
-                //     ]
-                // );
+                $sanitizedMessage = strip_tags($form->getData()->getContent());
+                $mail->send(
+                    $form->getData()->getEmail(),
+                    'contact@maconnerie-probuild.fr',
+                    $form->getData()->getSubject(),
+                    'contact',
+                    [
+                        "phoneNumber" => $form->getData()->getPhoneNumber(),
+                        "fullName" => $form->getData()->getFullName(),
+                        "message" => $sanitizedMessage,
+                    ]
+                );
 
                 $this->addFlash('success', 'Votre email a été envoyé');
                 return $this->redirectToRoute('app_contact');

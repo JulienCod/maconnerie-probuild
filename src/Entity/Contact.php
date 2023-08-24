@@ -35,8 +35,8 @@ class Contact
     
     private string $subject;
     
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(min: 100, max: 1000, minMessage:"Le message ne peut pas contenir moins de {{limit}} caractères", maxMessage:"Le message ne peut pas contenir plus de {{limit}} caractères")]
+    #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 30, max: 255, minMessage:"Le message ne peut pas contenir moins de {{limit}} caractères", maxMessage:"Le message ne peut pas contenir plus de {{limit}} caractères")]
     #[Assert\NotBlank(message: "Le champs message ne peut pas être vide")]
 
     private string $content;
@@ -121,12 +121,12 @@ class Contact
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
