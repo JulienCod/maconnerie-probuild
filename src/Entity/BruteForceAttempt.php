@@ -5,19 +5,21 @@ namespace App\Entity;
 use App\Repository\BruteForceAttemptRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: BruteForceAttemptRepository::class)]
 class BruteForceAttempt
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $ip = null;
+
+    private string $ip;
 
     #[ORM\Column]
-    private ?int $attempts = null;
+    private int $attempts ;
 
     #[ORM\Column]
     private ?bool $isBan = null;
