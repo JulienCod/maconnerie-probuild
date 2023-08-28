@@ -43,7 +43,8 @@ jobs:
           sftpArgs: -r
           port: ${{ secrets.PORT }}
           local_path: |
-            - /*
+            - public/
+            - tests/
             - !exclude node_modules/
             - !exclude var/
             - !exclude vendor/
