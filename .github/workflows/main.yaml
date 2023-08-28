@@ -13,9 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup Composer
+      - name: Setup PHP and Composer
         run: |
-          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          sudo apt-get update
+          sudo apt-get install -y php-cli php-zip unzip
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          php -r "unlink('composer-setup.php');"
 
       - name: Setup Node.js and Yarn
         uses: actions/setup-node@v2
