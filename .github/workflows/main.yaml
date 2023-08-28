@@ -15,9 +15,7 @@ jobs:
 
       - name: Setup Composer
         run: |
-          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-          php -r "unlink('composer-setup.php');"
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
       - name: Setup Node.js and Yarn
         uses: actions/setup-node@v2
