@@ -1,36 +1,33 @@
-name: CI/CD for symfony 6 App
+name: Deploy to VPS
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches: 
-      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js and Yarn
+      - name: Setup Node.js and Yarn
         uses: actions/setup-node@v2
         with:
           node-version: 14
 
-      - name: Install Yarn
-        run: npm install -g yarn --ignore-scripts
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build and deploy
+      - name: Install Composer and Yarn dependencies
         run: |
-          yarn build
-          # Ajoutez ici les étapes nécessaires pour déployer votre application (par exemple, transfert des fichiers construits vers le serveur).
+          composer install --no-interaction --no-progress --prefer-dist
+          yarn install --frozen-lockfile --ignore-scripts
+
+      - name: Build assets
+        run: yarn build
+
+      - name: Create deployment archive
+        run: zip -r deployment.zip . -x 'node_modules/*' 'var/*' 'vendor/*'
 
       - name: Upload to server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -42,13 +39,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           sftpArgs: -r
           port: ${{ secrets.PORT }}
-          local_path: |
-            - public/
-            - tests/
-            - !exclude node_modules/
-            - !exclude var/
-            - !exclude vendor/
-
+          local_path: deployment.zip
       - name: Set Up Symfony Production Environment
         run: |
           # Create Doctrine database
