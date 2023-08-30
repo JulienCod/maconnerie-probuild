@@ -18,9 +18,8 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install Composer and Yarn dependencies
-        run: |
-          yarn install -g yarn --ignore-scripts
+      - name: Install dependencies
+        run: yarn install
 
       - name: Build assets
         run: yarn build
