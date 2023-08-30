@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Composer and Yarn dependencies
         run: |
-          yarn install --frozen-lockfile --ignore-scripts
+          yarn install -g yarn --ignore-scripts
 
       - name: Build assets
         run: yarn build
