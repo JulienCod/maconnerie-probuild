@@ -1,4 +1,4 @@
-name: CI/CD for symfony 6 App
+name: CI/CD for Symfony 6 App
 
 on:
   push:
@@ -30,12 +30,9 @@ jobs:
       - name: Build and deploy
         run: |
           yarn build
-      
-      - name: Install zip
-        run: sudo apt-get -y install zip
 
       - name: Create deployment archive
-        run: zip -r deployment.zip . -x 'node_modules/*' 'var/*' 'vendor/*'
+        run: tar -czf deployment.tar.gz . --exclude='node_modules/*' --exclude='var/*' --exclude='vendor/*'
 
       - name: Upload to server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -47,4 +44,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           sftpArgs: -r
           port: ${{ secrets.PORT }}
-          local_path: deployment.zip
+          local_path: deployment.tar.gz
