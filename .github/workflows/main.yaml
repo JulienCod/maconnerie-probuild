@@ -18,8 +18,11 @@ jobs:
       with:
         php-version: '8.1'
 
-    - name: Install dependencies
-      run: composer install
+    - name: Install Composer
+      run: |
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+        php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+        php -r "unlink('composer-setup.php');"
 
     - name: Build front-end assets
       run: |
