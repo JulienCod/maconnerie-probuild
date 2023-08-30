@@ -18,14 +18,9 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install PHP and Composer
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-          tools: composer
-
-      - name: Install Yarn dependencies
-        run: yarn install --frozen-lockfile --ignore-scripts
+      - name: Install Composer and Yarn dependencies
+        run: |
+          yarn install --frozen-lockfile --ignore-scripts
 
       - name: Build assets
         run: yarn build
