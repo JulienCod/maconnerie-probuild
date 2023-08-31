@@ -35,8 +35,8 @@
 							{{ category.name }}
 						</td>
 						<td class="px-6 py-4">
-							<a type='button' class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800" href="{{ path('admin_categories_show', {'id': category.id}) }}">Voir</a>
 							<a type='button' class="p-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-800" href="{{ path('admin_categories_edit', {'id': category.id}) }}">Modifier</a>
+							<a type='button' class="p-2 bg-red-500 text-white rounded-2xl hover:bg-red-800" href="{{ path('admin_categories_show', {'id': category.id}) }}">Supprimer</a>
 						</td>
 					</tr>
 				{% else %}

@@ -6,7 +6,7 @@
 {% block body %}
 	<h1 class="text-center">Liste des articles</h1>
 	<div class="flex justify-end">
-		<a href="{{ path('app_articles_new') }}" class="p-2 bg-green-500 text-white rounded-2xl hover:bg-green-800">Créer un nouvelle article</a>
+		<a href="{{ path('admin_articles_new') }}" class="p-2 bg-green-500 text-white rounded-2xl hover:bg-green-800">Créer un nouvelle article</a>
 	</div>
 	{% if articles %}
 		<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -45,9 +45,9 @@
 							<td class="px-6 py-4">
 								{{ article.updatedAt ? article.updatedAt|date('Y-m-d H:i:s') : '' }}
 							</td>
-							<td class="px-6 py-4 flex flex-col gap-2 text-center">
-								<a type="button" href="{{ path('app_articles_show', {'id': article.id}) }}" class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Voir</a>
-								<a type="button" href="{{ path('app_articles_edit', {'id': article.id}) }}" class="p-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-800">Modifier</a>
+							<td class="px-6 py-4 flex">
+								<a type="button" href="{{ path('admin_articles_show', {'id': article.id}) }}" class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Voir</a>
+								<a type="button" href="{{ path('admin_articles_edit', {'id': article.id}) }}" class="p-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-800">Modifier</a>
 							</td>
 						</tr>
 					{% endfor %}

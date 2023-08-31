@@ -42,6 +42,8 @@ class CategoriesController extends AbstractController
             $this->entityManager->persist($category);
             $this->entityManager->flush();
 
+            $this->addFlash('success', 'La catégorie à été créé');
+
             return $this->redirectToRoute('admin_categories_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -68,7 +70,9 @@ class CategoriesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_categories_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'La catégorie à été modifiée');
+
+            return $this->redirectToRoute('admin_categories_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/categories/edit.html.twig', [
@@ -83,8 +87,12 @@ class CategoriesController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
             $this->entityManager->remove($category);
             $this->entityManager->flush();
+
+            $this->addFlash('success', 'La catégorie à été supprimée');
+
+            return $this->redirectToRoute('admin_categories_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('app_categories_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_categories_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -17,7 +17,7 @@ class DashboardController extends AbstractController
     ): Response
     {
         // mettre en place un récapitulatif des données
-        $countContact = count($entityManager->getRepository(Contact::class)->findAll());
+        $countContact = count($entityManager->getRepository(Contact::class)->findBy(["IsView" => false]));
         $countArticle = count($entityManager->getRepository(Articles::class)->findAll());
         return $this->render('admin/dashboard/index.html.twig',compact('countContact','countArticle'));
     }

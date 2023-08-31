@@ -43,6 +43,8 @@ class TagsController extends AbstractController
             $this->entityManager->persist($tag);
             $this->entityManager->flush();
 
+            $this->addFlash('success', 'Le tag a été créé');
+
             return $this->redirectToRoute('admin_tags_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -69,7 +71,9 @@ class TagsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_tags_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Le tag a été modifié');
+
+            return $this->redirectToRoute('admin_tags_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/tags/edit.html.twig', [
@@ -84,8 +88,12 @@ class TagsController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
             $this->entityManager->remove($tag);
             $this->entityManager->flush();
+
+            $this->addFlash('success', 'Le tag a été supprimé');
+
+            return $this->redirectToRoute('admin_tags_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('app_tags_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_tags_index', [], Response::HTTP_SEE_OTHER);
     }
 }

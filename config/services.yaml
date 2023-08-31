@@ -24,6 +24,13 @@ services:
         arguments:
             $mailer: '@Symfony\Component\Mailer\MailerInterface'
 
+    App\Security\AccessDeniedController:
+        class: App\Security\AccessDeniedController
+        arguments:
+            $urlGenerator: '@Symfony\Component\Routing\Generator\UrlGeneratorInterface'
+        tags:
+            - { name: 'controller.service_arguments' }
+
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/articles', name:'app_articles_')]
+#[Route('/admin/articles', name:'admin_articles_')]
 class ArticlesController extends AbstractController
 {
     private $pictureService;
@@ -68,7 +68,7 @@ class ArticlesController extends AbstractController
                 // on défibir ke dossier de destination
                 $folder = 'articles';
 
-                // on appelle le service d'ajout
+                // on adminelle le service d'ajout
                 $fichier = $this->pictureService->add($image, $folder, 300, 300);
 
                 $img = new Images();
@@ -76,16 +76,12 @@ class ArticlesController extends AbstractController
                 $article->addImage($img);
 
             }
-            try {
                 $this->entityManager->persist($article);
                 $this->entityManager->flush();
-            } catch (\Exception $e) {
-                // Afficher ou enregistrer l'exception selon vos besoins
-                dump($e->getMessage());
-                die();
-            }
 
-            return $this->redirectToRoute('app_articles_index', [], Response::HTTP_SEE_OTHER);
+                $this->addFlash('success', 'l\'article a été créé');
+
+            return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/articles/new.html.twig', [
@@ -128,7 +124,7 @@ class ArticlesController extends AbstractController
                 // on défini le dossier de destination
                 $folder = 'articles';
 
-                // on appelle le service d'ajout
+                // on adminelle le service d'ajout
                 $fichier = $this->pictureService->add($image, $folder, 300, 300);
 
                 $img = new Images();
@@ -136,9 +132,13 @@ class ArticlesController extends AbstractController
                 $article->addImage($img);
 
             }
+
+            $this->entityManager->persist($article);
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_articles_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'l\'article a été modifié');
+
+            return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/articles/edit.html.twig', [
@@ -164,33 +164,34 @@ class ArticlesController extends AbstractController
             }
             $this->entityManager->remove($article);
             $this->entityManager->flush();
+
+            $this->addFlash('success', 'l\'article a été modifié');
+
+            return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('app_articles_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_articles_index', [], Response::HTTP_SEE_OTHER);
     }
 
 
-    #[Route('/suppression/image/{id}', name: 'delete_image', methods: ['POST'])]
+    #[Route('/suppression/image/{id}', name: 'delete_image', methods: ['DELETE'])]
     public function deleteImage(Request $request, Images $image): JsonResponse
     {
-
-        if ($this->isCsrfTokenValid('delete'.$image->getId(), $request->request->get('_token'))) {
+        $data =json_decode($request->getContent(), true);
+        if ($this->isCsrfTokenValid('delete'. $image->getId(), $data['_token'])) {
             // Le token csrf est valide
             $nom = $image->getName();
             if($this->pictureService->delete($nom, 'articles', 300, 300)) {
                 $this->entityManager->remove($image);
                 $this->entityManager->flush();
 
-                $this->addFlash('success', "L'image a été supprimé avec succès");
-                return new JsonResponse('Image supprimé avec succès', 200);
+                return new JsonResponse(['success' => true], 200);
             }
 
             // erreur de suppression
-            $this->addFlash('danger', "L'image n'a pas été supprimé suite a une erreur");
-            return new JsonResponse('L\'image n\'a pas été supprimé suite a une erreur', 403);
+            return new JsonResponse(['error'=>'Érreur de suppression'], 400);
 
         }
-        $this->addFlash('danger', "Le token est invalide");
-        return new JsonResponse('Le token est invalide', 403);
+        return new JsonResponse(['error', 'Le token est invalide'], 400);
     }
 }

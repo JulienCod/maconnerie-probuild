@@ -1,18 +1,20 @@
 {{ form_start(form) }}
 {{ form_widget(form) }}
-<button class="p-2 bg-blue-500 mt-4 text-white rounded-2xl hover:bg-blue-800">{{ button_label|default('Sauvegarder') }}</button>
+<button class="p-2 bg-blue-500 mt-4 text-white rounded-2xl hover:bg-blue-800">
+	{{ button_label|default('Sauvegarder') }}</button>
 {{ form_end(form) }}
-{% if app.request.attributes.get('_route') == 'app_articles_edit' %}
+{% if app.request.attributes.get('_route') == 'admin_articles_edit' %}
 	<h2>images</h2>
 	<div class="flex flex-wrap">
-	{% for image in article.images %}
-		<div class="flex">
-			<img src="{{ asset('assets/uploads/articles/mini/300x300-'~ image.name)}}" alt="image">
-			<form method="POST" action="{{ path('app_articles_delete_image', {id: image.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer cette image?');">
-				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ image.id) }}">
-				<button class="p-4 bg-red-500 rounded-2xl text-white hover:bg-red-800">Supprimer</button>
-			</form>
-		</div>
-	{% endfor %}
+		{% for image in article.images %}
+			<div class="flex gap-2 relative">
+				<img src="{{ asset('assets/uploads/articles/mini/300x300-'~ image.name)}}" alt="image">
+				<a  href="{{ path('admin_articles_delete_image', {id: image.id}) }}" data-delete 
+				data-token="{{ csrf_token('delete' ~ image.id) }}" 
+				class="m-2 p-2 absolute top-0 right-0 bg-red-500 rounded-2xl text-white hover:bg-red-800">
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7Zm2-4h2V8H9v9Zm4 0h2V8h-2v9Z"/></svg>
+				</a>
+			</div>
+		{% endfor %}
 	</div>
 {% endif %}

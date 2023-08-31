@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="text-center">Listes des tags</h1>
     <div class="flex justify-end">
-    <a class="p-2 bg-green-500 text-white rounded-xl hover:bg-green-800" href="{{ path('admin_tags_new') }}">Create new</a>
+    <a class="p-2 bg-green-500 text-white rounded-xl hover:bg-green-800" href="{{ path('admin_tags_new') }}">Créer un nouveau tag</a>
     </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 		<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -32,9 +32,9 @@
 						<td class="px-6 py-4">
 							{{ tag.name }}
 						</td>
-						<td class="px-6 py-4">
-							<a type='button' class="p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800" href="{{ path('admin_tags_show', {'id': tag.id}) }}">Voir</a>
+						<td class="px-6 py-4 flex">
 							<a type='button' class="p-2 bg-orange-500 text-white rounded-2xl hover:bg-orange-800" href="{{ path('admin_tags_edit', {'id': tag.id}) }}">Modifier</a>
+							<a type='button' class="p-2 bg-red-500 text-white rounded-2xl hover:bg-red-800" href="{{ path('admin_tags_delete', {'id': tag.id}) }}">Supprimer</a>
 						</td>
 					</tr>
 				{% else %}

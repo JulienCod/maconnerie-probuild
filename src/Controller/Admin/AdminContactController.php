@@ -44,11 +44,14 @@ class AdminContactController extends AbstractController
         return $this->render('admin/contact/index.html.twig',compact('contacts'));
     }
 
-    #[Route('/{id}', name: 'view')]
+    #[Route('/{id}', name: 'view', methods:['GET'])]
     public function view($id): Response
     {
         $data = $this->contactRepository->find($id);
-        
+        $data->setIsView(true);
+        $this->entityManager->persist($data);
+        $this->entityManager->flush();
+
         $contact = [
                 "id" => $data->getId(),
                 "fullName" => $data->getFullName(),
@@ -59,7 +62,7 @@ class AdminContactController extends AbstractController
                 "createdAt" => $data->getCreatedAt()->format('Y-m-d H:i:s'),
                 "isView" => $data->isIsView(),
             ];
-
+        
         return $this->render('admin/contact/view.html.twig',compact('contact'));
     
     }
