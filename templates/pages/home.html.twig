@@ -20,10 +20,10 @@
 						<br>
 						<br>
 						Chez Maçonnerie ProBuild, nous croyons en la puissance de la maçonnerie pour transformer vos rêves en réalité. Chaque brique, chaque pierre que nous posons est imprégnée de notre engagement envers l'excellence et la durabilité. Nous façonnons votre espoir en une réalité solide qui durera des générations.
-						<br>
-						<br>
 					</p>
-					<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-beige_chaud_clair" href="{{ path('app_contact') }}" title="Contacter notre entreprise">Nous contacter</a>
+					<div class="p-4 flex justify-center">
+						<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-beige_chaud_clair" href="{{ path('app_contact') }}" title="Contacter notre entreprise">Nous contacter</a>
+					</div>
 				</div>
 			</div>
 		</article>
@@ -51,7 +51,9 @@
 					</ul>
 					<img class="md:w-[calc((100%/3)-(32px*2))]  object-cover object-center" src="{{ asset('assets/images/static/service-2.webp') }}" alt="image d'un maçon qui monte un mur de brique" loading="lazy">
 				</div>
-				<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_services')}}" title="En savoir plus sur nos services">Explorer nos services</a>
+				<div class="p-4 mt-8">
+					<a type="button" class=" rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_services')}}" title="En savoir plus sur nos services">Explorer nos services</a>
+				</div>
 			</div>
 		</article>
 		{# fin service #}
@@ -113,8 +115,8 @@
 						</span>
 					</button>
 				</div>
-				<div>
-					<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_portfolio') }}" title="Consulter les projets réalisés par notre entreprise">
+				<div class="mt-8 p-4 flex justify-center">
+					<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_portfolio') }}" title="Consulter les projets réalisés par notre entreprise">
 						Voir nos autres réalisations
 					</a>
 				</div>
@@ -140,9 +142,11 @@
 						Approche personnelle à chaque projet
 					</li>
 				</ul>
-				<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_about') }}" title="En savoir plus sur notre entreprise">
+				<div class="p-4 mt-8 flex justify-center">
+				<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_about') }}" title="En savoir plus sur notre entreprise">
 					Découvrez ce qui nous distingue
 				</a>
+				</div>
 			</div>
 		</article>
 		{# fin choix #}
@@ -282,7 +286,9 @@
 			<div class="max-w-screen-2xl m-auto">
 				<h2>Contactez-nous</h2>
 				<h3 class="my-8 w-[85%] m-auto">Des questions ? Besoin d'un devis ? Contactez-nous dès aujourd'hui pour discuter de vos projets de maçonnerie.</h3>
-				<a type="button" class="mt-8 rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_contact') }}" title="Contacter notre entreprise">Contact</a>
+				<div class="mt-8 p-4 flex justify-center">
+				<a type="button" class="rounded border bg-beige_chaud p-4 uppercase hover:bg-gris_ardoise " href="{{ path('app_contact') }}" title="Contacter notre entreprise">Contact</a>
+				</div>
 			</div>
 		</article>
 		{# fin contact #}

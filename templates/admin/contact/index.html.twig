@@ -9,7 +9,7 @@
 		<div class="relative p-4 overflow-x-auto shadow-md sm:rounded-lg">
 			<table class="w-full text-sm text-left text-gray-500 ">
 				<thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
-					<tr>
+					<tr class="text-center">
 						<th scope="col" class="px-6 py-3">
 							status
 						</th>
@@ -66,7 +66,7 @@
 							<td class="px-6 py-4 ">
 								{{ contact.subject }}
 							</td>
-							<td class="px-6 py-4 flex">
+							<td class="px-6 py-4 flex gap-8">
 								<a href="{{ path('admin_contact_view', {id: contact.id}) }}" class=" m-2 p-2 bg-blue-500 text-white rounded-2xl hover:bg-blue-800">Voir</a>
 
 								<a href="{{ path('admin_contact_delete', {id: contact.id}) }}" class=" m-2 p-2 bg-red-500 text-white rounded-2xl hover:bg-red-800">Supprimer</a>
